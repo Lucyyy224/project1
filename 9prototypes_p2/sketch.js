@@ -8,7 +8,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(800, 400);
+  createCanvas(600, 600);
   textFont(font);
   generatePoints();
 }
@@ -16,8 +16,10 @@ function setup() {
 function draw() {
   background(0);
 
-  text("Press 1-9 in your keyboardto change effect", 100, 50);
-  
+  fill(255);
+  textSize(16);
+  text("Press 1-9 to change effect", 20, 30);
+
   if (effectType === 1) {
     
     fill(255);
@@ -34,7 +36,7 @@ function draw() {
       ellipse(p.x, p.y + yOffset, 5, 5);
     }
   } else if (effectType === 3) {
-    
+    // 3. 噪声抖动
     fill(0, 255, 0);
     noStroke();
     for (let p of points) {
@@ -51,17 +53,18 @@ function draw() {
       let yOffset = random(-2, 2);
       ellipse(p.x + xOffset, p.y + yOffset, 5, 5);
     }
-} else if (effectType === 5) {
+  } else if (effectType === 5) {
+    
     fill(0, 255, 255);
     noStroke();
     for (let p of points) {
-        let fallSpeed = (frameCount - p.initFrame) * 0.5; 
-        let newY = min(p.y + fallSpeed, height - 5); 
-        ellipse(p.x, newY, 5, 5);
+      p.y += 2; 
+      if (p.y > height) {
+        p.y = random(-50, 50); 
+      }
+      ellipse(p.x, p.y, 5, 5);
     }
-}
-
-  else if (effectType === 6) {
+  } else if (effectType === 6) {
     
     stroke(255);
     noFill();
@@ -100,7 +103,7 @@ function draw() {
 }
 
 function generatePoints() {
-  points = font.textToPoints('404 Not Found', 100, 200, 100, {
+  points = font.textToPoints('404 Not Found', 80, 300, 80, { 
     sampleFactor: sampleFactor
   }).map(p => ({ x: p.x, y: p.y, initFrame: frameCount }));
 }
