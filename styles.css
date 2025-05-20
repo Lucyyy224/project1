@@ -191,3 +191,13 @@ button:hover {
     height: auto; 
     border-radius: 8px; 
 }
+
+/* 让 video 和 img 样式统一风格 */
+.grid-item video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    display: block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
